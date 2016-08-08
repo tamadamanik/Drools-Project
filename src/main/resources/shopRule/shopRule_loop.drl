@@ -1,0 +1,46 @@
+package Controller ;
+
+import Module.ShopCart ;
+
+import Enum.MemberType ;
+
+rule "MemberBusiness RF"
+	when
+		$sc : ShopCart(memberType == MemberType.BUSINESS);		
+	then
+		System.out.println("Member Business Rule");
+		$sc.setDiscount(7);
+		$sc.setPaidBill();
+		update($sc);
+end
+
+rule "MemberPublic RF"	
+	when
+		$sc : ShopCart(memberType == MemberType.PUBLIC);		
+	then
+		System.out.println("Member Public Rule");
+		$sc.setDiscount(4);
+		$sc.setPaidBill();
+		update($sc);
+end
+
+rule "TotalItem RF"
+	when
+		$sc : ShopCart(totalItem > 10);		
+	then
+		System.out.println("Total Item Rule *EDITED");
+		$sc.setDiscount(5);
+		$sc.setPaidBill();
+		update($sc);
+end
+
+rule "TotalBill RF"
+	when
+		$sc : ShopCart(totalBill > 1000000);		
+	then
+		System.out.println("Total Bill Rule");
+		$sc.setDiscount(5);
+		$sc.setPaidBill();
+		update($sc);
+end
+		

@@ -1,0 +1,42 @@
+package Controller ;
+
+import Module.ShopCart ;
+import Enum.MemberType ;
+
+expander shopRuleDSL.dsl
+
+rule "MemberBusiness DSL"
+    when
+		If there is a ShopCart with member type is business
+    then
+		Message business member rules
+		Set discount 7
+		Set new paid bill
+end
+
+rule "MemberPublic DSL"
+    when
+	    If there is a ShopCart with member type is public
+    then
+		Message public member rules
+		Set discount 4
+		Set new paid bill
+end
+
+rule "TotalItem DSL"
+    when
+    	If there is a ShopCart with total item more than 10
+    then
+    	Message total item rules
+		Set discount 5
+		Set new paid bill
+end
+
+rule "TotalBill DSL"
+    when
+		If there is a ShopCart with totalBill more than 1000000
+    then
+    	Message total bill rules
+		Set discount 5
+		Set new paid bill
+end
